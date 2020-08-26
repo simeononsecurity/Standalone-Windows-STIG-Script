@@ -79,7 +79,7 @@ Standalone systems are some of the most difficult and annoying systems to secure
 
 ## How to run the script
 
-**The script may be lauched from the extracted GitHub download like this:**
+**The script may be launched from the extracted GitHub download like this:**
 ```
 .\secure-standalone.ps1
 ```
