@@ -15,7 +15,7 @@ Standalone systems are some of the most difficult and annoying systems to secure
 
 - This script is designed for operation in **Enterprise** environments and assumes you have hardware support for all the requirements.
   - For personal systems please see this [GitHub Repository](https://github.com/simeononsecurity/W10-Optimize-and-Harden)
-- This script is not designed to bring a system to 100% compliance., rather it should be used as a stepping stone to complete most, if not all, the configuration changes that can be scripted. 
+- This script is not designed to bring a system to 100% compliance, rather it should be used as a stepping stone to complete most, if not all, the configuration changes that can be scripted. 
   - Minus system documentation, this collection should bring you up to about 95% compliance on all the STIGS/SRGs applied.
 
 ## Requirements:
