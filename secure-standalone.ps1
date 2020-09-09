@@ -17,9 +17,6 @@ start-job -ScriptBlock {mkdir "C:\temp\Windows Defender"; copy-item -Path .\File
 #.\Files\Optional\sos-ssl-hardening.ps1
 # powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 
-#Work In Progress
-.\Files\Optional\sos-.net-4-stig.ps1
-
 #Security Scripts
 start-job -ScriptBlock {takeown /f C:\WINDOWS\Policydefinitions /r /a; icacls C:\WINDOWS\PolicyDefinitions /grant Administrators:(OI)(CI)F /t; copy-item -Path .\Files\PolicyDefinitions\* -Destination C:\Windows\PolicyDefinitions -Force -Recurse -ErrorAction SilentlyContinue}
 
@@ -128,52 +125,183 @@ If (Test-Path -Path "C:\temp\JAVA\"){
     Write-Output "JAVA Configs Installed"
 }
 
+
+# .Net STIG
+
+#SimeonOnSecurity - Microsoft .Net Framework 4 STIG Script
+#https://github.com/simeononsecurity
+#https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_MS_DotNet_Framework_4-0_V1R9_STIG.zip
+#https://docs.microsoft.com/en-us/dotnet/framework/tools/caspol-exe-code-access-security-policy-tool
+
+#Continue on error
+$ErrorActionPreference= 'silentlycontinue'
+
+#Require elivation for script run
+#Requires -RunAsAdministrator
+Write-Output "Elevating priviledges for this process"
+do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
+
+If (Test-Path -Path "HKLM:\Software\Microsoft\StrongName\Verification"){
+    Remove-Item "HKLM:\Software\Microsoft\StrongName\Verification" -Recurse -Force
+    Write-Host ".Net StrongName Verification Registry Removed"
+}
+
+# .Net 32-Bit
+If (Test-Path -Path C:\Windows\Microsoft.NET\Framework\v2.0.50727){
+    Write-Host ".Net 32-Bit v2.0.50727 Is Installed"
+    C:\Windows\Microsoft.NET\Framework\v2.0.50727\caspol.exe -q -f -pp on 
+    C:\Windows\Microsoft.NET\Framework\v2.0.50727\caspol.exe -m -lg
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v2.0.50727\SchUseStrongCrypto"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v2.0.50727\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v2.0.50727\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }
+}Else {
+    Write-Host ".Net 32-Bit v2.0.50727 Is Not Installed"
+}
+If (Test-Path -Path C:\Windows\Microsoft.NET\Framework\v3.0){
+    Write-Host ".Net 32-Bit v3.0 Is Installed"
+    C:\Windows\Microsoft.NET\Framework\v3.0\caspol.exe -q -f -pp on 
+    C:\Windows\Microsoft.NET\Framework\v3.0\caspol.exe -m -lg
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.0\SchUseStrongCrypto"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.0\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.0\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }
+}Else {
+    Write-Host ".Net 32-Bit v3.0 Is Not Installed"
+}
+If (Test-Path -Path C:\Windows\Microsoft.NET\Framework\v3.5){
+    Write-Host ".Net 32-Bit v3.5 Is Installed"
+    C:\Windows\Microsoft.NET\Framework\v3.5\caspol.exe -q -f -pp on 
+    C:\Windows\Microsoft.NET\Framework\v3.5\caspol.exe -m -lg
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.5\SchUseStrongCrypto"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.5\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.5\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }
+}Else {
+    Write-Host ".Net 32-Bit v3.5 Is Not Installed"
+}
+If (Test-Path -Path C:\Windows\Microsoft.NET\Framework\v4.0.30319){
+    Write-Host ".Net 32-Bit v4.0.30319 Is Installed"
+    C:\Windows\Microsoft.NET\Framework\v4.0.30319\caspol.exe -q -f -pp on 
+    C:\Windows\Microsoft.NET\Framework\v4.0.30319\caspol.exe -m -lg
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319\SchUseStrongCrypto"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }
+    #Copy-Item -Path .\Files\machine.config -Destination C:\Windows\Microsoft.NET\Framework\v4.0.30319\Config -Force 
+}Else {
+    Write-Host ".Net 32-Bit v4.0.30319 Is Not Installed"
+}
+
+# .Net 64-Bit
+If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v2.0.50727){
+    Write-Host ".Net 64-Bit v2.0.50727 Is Installed"
+    C:\Windows\Microsoft.NET\Framework64\v2.0.50727\caspol.exe -q -f -pp on 
+    C:\Windows\Microsoft.NET\Framework64\v2.0.50727\caspol.exe -m -lg
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }
+    If (Test-Path -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v2.0.50727\") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v2.0.50727\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v2.0.50727\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }
+}Else {
+    Write-Host ".Net 64-Bit v2.0.50727 Is Not Installed"
+}
+If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v3.0){
+    Write-Host ".Net 64-Bit v3.0 Is Installed"
+    C:\Windows\Microsoft.NET\Framework64\v3.0\caspol.exe -q -f -pp on 
+    C:\Windows\Microsoft.NET\Framework64\v3.0\caspol.exe -m -lg
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }
+    If (Test-Path -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.0\") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.0\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.0\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }
+}Else {
+    Write-Host ".Net 64-Bit v3.0 Is Not Installed"
+}
+If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v3.5){
+    Write-Host ".Net 64-Bit v3.5 Is Installed"
+    C:\Windows\Microsoft.NET\Framework64\v3.5\caspol.exe -q -f -pp on 
+    C:\Windows\Microsoft.NET\Framework64\v3.5\caspol.exe -m -lg
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }
+    If (Test-Path -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.5\") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.5\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.5\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }
+}Else {
+    Write-Host ".Net 64-Bit v3.5 Is Not Installed"
+}
+If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v4.0.30319){
+    Write-Host ".Net 64-Bit v4.0.30319 Is Installed"
+    C:\Windows\Microsoft.NET\Framework64\v4.0.30319\caspol.exe -q -f -pp on 
+    C:\Windows\Microsoft.NET\Framework64\v4.0.30319\caspol.exe -m -lg
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
+    }
+    If (Test-Path -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319\") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }Else {
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
+    }
+    #Copy-Item -Path .\Files\machine.config -Destination C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config -Force 
+}Else {
+    Write-Host ".Net 64-Bit v4.0.30319 Is Not Installed"
+}
+
+FINDSTR /i /s "NetFx40_LegacySecurityPolicy" c:\*.exe.config 
+
 #GPO Configurations
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Access 2013"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Access 2016"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Adobe Reader Classic - Computer"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Adobe Reader Classic - User"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Adobe Reader Cont. - Computer"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Adobe Reader Cont. - User"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Excel 2013"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Excel 2016"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Google Chrome"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Infopath 2013 - Computer"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Infopath 2013 - User"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Internet Explorer 11 - Computer"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Internet Explorer 11 - User"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Office 2013 System - Computer"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Office 2013 System - User"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Office 2016 System - Computer"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Office 2016 System - User"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Office 2019 - Computer"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Office 2019 - User"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - OneDrive for Business 2016 - Computer"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - OneDrive for Business 2016 - User"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Outlook 2013"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Outlook 2016"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - PowerPoint 2013"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - PowerPoint 2016"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Project 2013"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Project 2016"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Publisher 2013"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Publisher 2016"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Skype for Business 2016"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Visio 2013"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Visio 2016"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Windows 10 - Computer"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Windows 10 - User"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Windows Defender"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Windows Firewall"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Word 2013"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\DoD\"DoD - Word 2016"
-#.\Files\LGPO\LGPO.exe /g .\Files\GPOs\NSACyber\"NSACyber - Applocker (Audit)"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\NSACyber\"NSACyber - Applocker (Enforced)"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\NSACyber\"NSACyber - BitLocker"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\SoS\"DoD - Addendum to Imported GPOs"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\SoS\"SOS ActiveClient"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\SoS\"SOS FireFox STIG"
-.\Files\LGPO\LGPO.exe /g .\Files\GPOs\SoS\"SOS Netbanner"
+$gposdir "$(Get-Location)\Files\GPOs"
+Foreach ($gpocategory in Get-ChildItem "$(Get-Location)\Files\GPOs") {
+    
+    Write-Output "Importing $gpocategory GPOs"
+
+    Foreach ($gpo in (Get-ChildItem "$(Get-Location)\Files\GPOs\$gpocategory")) {
+        $gpopath = "$gposdir\$gpocategory\$gpo"
+        Write-Output "Importing $gpo"
+        .\Files\LGPO\LGPO.exe /g $gpopath
+    }
+}
 
 Add-Type -AssemblyName PresentationFramework
 $Answer = [System.Windows.MessageBox]::Show("Reboot to make changes effective?", "Restart Computer", "YesNo", "Question")
