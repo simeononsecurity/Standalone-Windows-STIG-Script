@@ -291,7 +291,7 @@ If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v4.0.30319){
 FINDSTR /i /s "NetFx40_LegacySecurityPolicy" c:\*.exe.config 
 
 #GPO Configurations
-$gposdir "$(Get-Location)\Files\GPOs"
+$gposdir = "$(Get-Location)\Files\GPOs"
 Foreach ($gpocategory in Get-ChildItem "$(Get-Location)\Files\GPOs") {
     
     Write-Output "Importing $gpocategory GPOs"
