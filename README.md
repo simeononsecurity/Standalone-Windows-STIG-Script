@@ -1,4 +1,4 @@
-# STIGing Standalone Windows 10 Systems
+# Windows 10 STIG Script
 
 **Download all the required files from the [GitHub Repository](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script)**
 
