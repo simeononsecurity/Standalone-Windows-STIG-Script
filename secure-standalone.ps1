@@ -18,7 +18,7 @@ start-job -ScriptBlock {mkdir "C:\temp"; mkdir "C:\temp\Windows Defender"; Copy-
 # powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 
 #Security Scripts
-Start-Job -ScriptBlock {takeown /f C:\WINDOWS\Policydefinitions /r /a; icacls C:\WINDOWS\PolicyDefinitions /grant Administrators:(OI)(CI)F /t}
+Start-Job -ScriptBlock {takeown /f C:\WINDOWS\Policydefinitions /r /a; icacls C:\WINDOWS\PolicyDefinitions /grant "Administrators:(OI)(CI)F" /t}
 Copy-Item -Path .\Files\PolicyDefinitions\* -Destination C:\Windows\PolicyDefinitions -Force -Recurse -ErrorAction SilentlyContinue
 
 #Disable TCP Timestamps
