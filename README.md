@@ -17,6 +17,7 @@ Standalone systems are some of the most difficult and annoying systems to secure
   - For personal systems please see this [GitHub Repository](https://github.com/simeononsecurity/W10-Optimize-and-Harden)
 - This script is not designed to bring a system to 100% compliance, rather it should be used as a stepping stone to complete most, if not all, the configuration changes that can be scripted. 
   - Minus system documentation, this collection should bring you up to about 95% compliance on all the STIGS/SRGs applied.
+  - Bitlocker must be suspended prior to implementing this script, it can be enabled again after rebooting.
 
 ## Requirements:
 - [X] Windows 10 Enterprise is **Required** per STIG.
