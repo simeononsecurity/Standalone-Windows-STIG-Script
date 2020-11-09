@@ -294,8 +294,6 @@ If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v4.0.30319){
     Write-Host ".Net 64-Bit v4.0.30319 Is Not Installed"
 }
 
-FINDSTR /i /s "NetFx40_LegacySecurityPolicy" c:\*.exe.config 
-
 #GPO Configurations
 $gposdir = "$(Get-Location)\Files\GPOs"
 Foreach ($gpocategory in Get-ChildItem "$(Get-Location)\Files\GPOs") {
