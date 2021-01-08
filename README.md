@@ -2,7 +2,7 @@
 
 **Download all the required files from the [GitHub Repository](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script)**
 
-**We are seeking help with the following [.Net issue](https://github.com/simeononsecurity/Windows-Optimize-Harden-Debloat/issues/3)** 
+**We are seeking help with implementing the [.Net](https://github.com/simeononsecurity/Windows-Optimize-Harden-Debloat/issues/3) STIG.** 
 
 ## Introduction:
 
