@@ -102,7 +102,11 @@ Start-Job -Name "Mitigations" -ScriptBlock {
     #Disable Powershell v2
     Disable-WindowsOptionalFeature -Online -FeatureName "MicrosoftWindowsPowerShellV2Root" -NoRestart
     Disable-WindowsOptionalFeature -Online -FeatureName "MicrosoftWindowsPowerShellV2" -NoRestart    
-   
+ 
+    #Enable potentially unwanted apps
+    Write-Host "Enable potentially unwanted apps"     
+    Set-MpPreference -PUAProtection 1
+
 }
 
 Start-Job -Name "STIG Addendum" -ScriptBlock {
