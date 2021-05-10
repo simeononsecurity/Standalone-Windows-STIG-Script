@@ -83,6 +83,26 @@ Start-Job -Name "Mitigations" -ScriptBlock {
 
     #Disable Hibernate
     powercfg -h off
+    
+    #SMB Hardening
+    Write-Output "SMB Hardening"  
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Name "RestrictNullSessAccess" -Type "DWORD" -Value 1 -Force 
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" -Name "RestrictAnonymousSAM" -Type "DWORD" -Value 1 -Force  
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" "RequireSecuritySignature" -Value 256 -Force 
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\LSA" -Name "RestrictAnonymous" -Type "DWORD" -Value 1 -Force
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NoLMHash" -Type "DWORD" -Value 1 -Force
+    Disable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol" -NoRestart
+    Disable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol-Client" -NoRestart
+    Disable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol-Server" -NoRestart 
+    Set-SmbClientConfiguration -RequireSecuritySignature $True -Force
+    Set-SmbClientConfiguration -EnableSecuritySignature $True -Force
+    Set-SmbServerConfiguration -EncryptData $True -Force 
+    Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force     #SMB Hardening
+    
+    #Disable Powershell v2
+    Disable-WindowsOptionalFeature -Online -FeatureName "MicrosoftWindowsPowerShellV2Root" -NoRestart
+    Disable-WindowsOptionalFeature -Online -FeatureName "MicrosoftWindowsPowerShellV2" -NoRestart    
+   
 }
 
 Start-Job -Name "STIG Addendum" -ScriptBlock {
