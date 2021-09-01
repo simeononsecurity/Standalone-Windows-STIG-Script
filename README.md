@@ -82,3 +82,7 @@ The script may be launched from the extracted GitHub download like this:
 iex ((New-Object System.Net.WebClient).DownloadString('https://simeononsecurity.ch/scripts/standalonewindows.ps1'))
 ```
 
+## Editing policies in Local Group Policy after the fact:
+- Import the ADMX Policy definitions from this [repo](https://github.com/simeononsecurity/STIG-Compliant-Domain-Prep/tree/master/Files/PolicyDefinitions) into *C:\windows\PolicyDefinitions* on the system you're trying to modify.
+- Open ```gpedit.msc``` on on the system you're trying to modify. 
+
