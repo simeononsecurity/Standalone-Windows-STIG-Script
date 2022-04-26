@@ -6,7 +6,9 @@
 
 
 ## Ansible:
-We now offer a playbook collection for this script. Please see the following [repo.](https://github.com/simeononsecurity/Windows_STIG_Ansible)
+We now offer a playbook collection for this script. Please see the following:
+- [Github Repo](https://github.com/simeononsecurity/Windows_STIG_Ansible)
+- [Ansible Galaxy](https://galaxy.ansible.com/simeononsecurity/windows_stigs)
 
 
 ## Introduction:
