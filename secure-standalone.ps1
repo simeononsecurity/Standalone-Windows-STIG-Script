@@ -688,11 +688,6 @@ auditpol /restore /file:C:\temp\auditbaseline.csv
 auditpol /list /user /v
 auditpol.exe /get /category:*
 
-
-Add-Type -AssemblyName PresentationFramework
-$Answer = [System.Windows.MessageBox]::Show("Reboot to make changes effective?", "Restart Computer", "YesNo", "Question")
-Switch ($Answer) {
-    "Yes" { Write-Host "Performing Gpupdate"; Gpupdate /force /boot; Get-Job; Write-Warning "Restarting Computer in 15 Seconds"; Start-sleep -seconds 15; Restart-Computer -Force }
-    "No" { Write-Host "Performing Gpupdate"; Gpupdate /force ; Get-Job; Write-Warning "A reboot is required for all changed to take effect" }
-    Default { Write-Warning "A reboot is required for all changed to take effect" }
-}
+Write-Host "Checking Backgrounded Processes" ; Get-Job
+Write-Host "Performing Group Policy Update" ; Gpupdate /force
+Write-Warning "A reboot is required for all changed to take effect"
