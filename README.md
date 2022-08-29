@@ -1,15 +1,15 @@
 # Windows 10 STIG Script
 
+[![Test script against windows docker container](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/test-with-docker.yml/badge.svg)](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/test-with-docker.yml)
+
 **Download all the required files from the [GitHub Repository](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script)**
 
 **Note:** This script should work for most, if not all, systems without issue. While [@SimeonOnSecurity](https://github.com/simeononsecurity) creates, reviews, and tests each repo intensively, we can not test every possible configuration nor does [@SimeonOnSecurity](https://github.com/simeononsecurity) take any responsibility for breaking your system. If something goes wrong, be prepared to submit an [issue](../../issues). Do not run this script if you don't understand what it does. It is your responsibility to review and test the script before running it.
-
 
 ## Ansible:
 We now offer a playbook collection for this script. Please see the following:
 - [Github Repo](https://github.com/simeononsecurity/Windows_STIG_Ansible)
 - [Ansible Galaxy](https://galaxy.ansible.com/simeononsecurity/windows_stigs)
-
 
 ## Introduction:
 
