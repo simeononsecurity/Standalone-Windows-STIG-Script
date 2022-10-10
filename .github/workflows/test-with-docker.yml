@@ -15,4 +15,4 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build the Docker image
-        run: docker build -t simeononsecurity/standalone-windows-stig:latest --progress=plain . ; docker push simeononsecurity/standalone-windows-stig:latest
+        run: docker build -t simeononsecurity/standalone-windows-stig:latest . ; docker push simeononsecurity/standalone-windows-stig:latest
