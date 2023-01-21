@@ -12,60 +12,17 @@ Get-ChildItem *.ps*1 -recurse | Unblock-File
 if ((Get-Location).Path -NE $PSScriptRoot) { Set-Location $PSScriptRoot }
 
 
-if ($paramscheck | Where-Object { $_ } | Select-Object) {
-        
-        
-          
-    foreach ($F in (Get-ChildItem "$env:SystemRoot\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~*.mum").FullName) {
-        
-        
-          
+# Install Local Group Policy if Not Already Installed   
+foreach ($F in (Get-ChildItem "$env:SystemRoot\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~*.mum").FullName) {
         if((dism /online /get-packages | where-object {$_.name -like "*Microsoft-Windows-GroupPolicy-ClientTools*"}).count -eq 0){
-        
-        
-          
-            dism /Online /NoRestart /Add-Package:$F
-        
-        
-          
-        }
-        
-        
-          
-    }
-        
-        
-          
-
-
-        
-        
-          
-    foreach ($F in (Get-ChildItem "$env:SystemRoot\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~*.mum").FullName) {
-        
-        
-          
+            dism /Online /NoRestart /Add-Package:$F 
+        }   
+}    
+foreach ($F in (Get-ChildItem "$env:SystemRoot\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~*.mum").FullName) {
         if((dism /online /get-packages | where-object {$_.name -like "*Microsoft-Windows-GroupPolicy-ClientExtensions*"}).count -eq 0){
-        
-        
-          
             dism /Online /NoRestart /Add-Package:$F
-        
-        
-          
-        }
-        
-        
-          
-    }
-        
-        
-          
-}# Install Local Group Policy if Not Already Installed
-        
-        
-          
-
+        }  
+}
 
 #Remove and Refresh Local Policies
 Remove-Item -Recurse -Force "$env:WinDir\System32\GroupPolicy" | Out-Null
