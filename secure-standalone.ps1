@@ -848,11 +848,11 @@ if ($horizon -eq $true) {
     Import-GPOs -gposdir ".\Files\GPOs\DoD\Horizon"
 }
 else {
-    Write-Output "The Optional SimeonOnSecurity Configurations Section Was Skipped..."
+    Write-Output "The VMware Horizon STIG Section Was Skipped..."
 }
 
 if ($sosoptional -eq $true) {
-    Write-Host "Implementing the SoS Device Guard Configurations" -ForegroundColor Green
+    Write-Host "Implementing the Optional SimeonOnSecurity Configurations Section" -ForegroundColor Green
     Import-GPOs -gposdir ".\Files\GPOs\SoS"
 }
 else {
