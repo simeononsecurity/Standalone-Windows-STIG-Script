@@ -1,4 +1,4 @@
-# Windows 10 STIG Script
+# Windows 10 and 11 STIG Script
 
 [![Test script against windows docker container](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/test-with-docker.yml/badge.svg)](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/test-with-docker.yml)
 
@@ -13,7 +13,7 @@ We now offer a playbook collection for this script. Please see the following:
 
 ## Introduction:
 
-Windows 10 is insecure operating system out of the box and requires many changes to insure [FISMA](https://www.cisa.gov/federal-information-security-modernization-act) compliance. 
+Windows is insecure operating system out of the box and requires many changes to insure [FISMA](https://www.cisa.gov/federal-information-security-modernization-act) compliance. 
 Organizations like [Microsoft](https://microsoft.com), [Cyber.mil](https://public.cyber.mil), the [Department of Defense](https://dod.gov), and the [National Security Agency](https://www.nsa.gov/) have recommended and required configuration changes to lockdown, harden, and secure the operating system and ensure government compliance. These changes cover a wide range of mitigations including blocking telemetry, macros, removing bloatware, and preventing many physical attacks on a system.
 
 Standalone systems are some of the most difficult and annoying systems to secure. When not automated, they require manual changes of each STIG/SRG. Totalling over 1000 configuration changes on a typical deployment and an average of 5 minutes per change equaling 3.5 days worth of work. This script aims to speed up that process significantly.
