@@ -1,6 +1,6 @@
 # Windows 10 and 11 STIG Script
 
-[![Test script against windows docker container](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/test-with-docker.yml/badge.svg)](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/test-with-docker.yml)
+[![Test script against windows docker container](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/test-with-docker.yml/badge.svg)](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/test-with-docker.yml)[![VirusTotal Scan](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/virustotal.yml/badge.svg)](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/virustotal.yml)[![PSScriptAnalyzer](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/powershell.yml/badge.svg)](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script/actions/workflows/powershell.yml)
 
 **Download all the required files from the [GitHub Repository](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script)**
 
