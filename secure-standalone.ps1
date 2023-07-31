@@ -34,8 +34,6 @@ param(
     [bool]$nessusPID = $true,
     [Parameter(Mandatory = $false)]
     [bool]$horizon = $true,
-    [Parameter(Mandatory = $false)]
-    [bool]$sosoptional = $true
 )
 
 ######SCRIPT FOR FULL INSTALL AND CONFIGURE ON STANDALONE MACHINE#####
@@ -851,13 +849,6 @@ else {
     Write-Output "The VMware Horizon STIG Section Was Skipped..."
 }
 
-if ($sosoptional -eq $true) {
-    Write-Host "Implementing the Optional SimeonOnSecurity Configurations Section" -ForegroundColor Green
-    Import-GPOs -gposdir ".\Files\GPOs\SoS"
-}
-else {
-    Write-Output "The Optional SimeonOnSecurity Configurations Section Was Skipped..."
-}
 
 Write-Host "Checking Backgrounded Processes"; Get-Job
 
