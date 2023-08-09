@@ -33,7 +33,7 @@ param(
     [Parameter(Mandatory = $false)]
     [bool]$nessusPID = $true,
     [Parameter(Mandatory = $false)]
-    [bool]$horizon = $true,
+    [bool]$horizon = $true
 )
 
 ######SCRIPT FOR FULL INSTALL AND CONFIGURE ON STANDALONE MACHINE#####
