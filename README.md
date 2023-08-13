@@ -128,6 +128,8 @@ You can also specify multiple parameters in the command like this:
 ```powershell
 .\secure-standalone.ps1 -firefox $false -chrome $false
 ```
+Note that in this example, both the Firefox and Chrome parameters are set to $false.
+
 
 
 <a href="https://simeononsecurity.ch" target="_blank" rel="noopener noreferrer">
@@ -140,7 +142,6 @@ You can also specify multiple parameters in the command like this:
 ### Links:
 - #### [github.com/simeononsecurity](https://github.com/simeononsecurity)
 - #### [simeononsecurity.ch](https://simeononsecurity.ch)
-Note that in this example, both the Firefox and Chrome parameters are set to $false.
 
 
 
