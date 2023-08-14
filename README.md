@@ -11,6 +11,10 @@ We now offer a playbook collection for this script. Please see the following:
 - [Github Repo](https://github.com/simeononsecurity/Windows_STIG_Ansible)
 - [Ansible Galaxy](https://galaxy.ansible.com/simeononsecurity/windows_stigs)
 
+## Docker:
+We test this script using an automated docker container
+- [](https://hub.docker.com/r/simeononsecurity/standalone-windows-stig)
+
 ## Introduction:
 
 Windows is insecure operating system out of the box and requires many changes to insure [FISMA](https://www.cisa.gov/federal-information-security-modernization-act) compliance. 
