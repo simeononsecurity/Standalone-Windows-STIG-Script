@@ -13,7 +13,7 @@ We now offer a playbook collection for this script. Please see the following:
 
 ## Docker:
 We test this script using an automated docker container
-- [](https://hub.docker.com/r/simeononsecurity/standalone-windows-stig)
+- [DockerHub](https://hub.docker.com/r/simeononsecurity/standalone-windows-stig)
 
 ## Introduction:
 
