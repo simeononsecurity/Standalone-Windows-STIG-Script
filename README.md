@@ -89,7 +89,7 @@ The script may be launched from the extracted GitHub download like this:
 ```powershell
 iex ((New-Object System.Net.WebClient).DownloadString('https://simeononsecurity.ch/scripts/standalonewindows.ps1'))
 ```
-**Note**: *This installation version all of the configurations. If you seek to customize it, please use the [Manual Install](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script#manual-install)*
+**Note**: *This installation version installs all of the configurations. If you seek to customize it, please use the [Manual Install](https://github.com/simeononsecurity/Standalone-Windows-STIG-Script#manual-install)*
 
 ### Chocolatey Install:
 Assuming you have [Chocolatey](https://chocolatey.org/install) installed. You may install this script via the following command:
