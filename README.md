@@ -124,7 +124,6 @@ The script takes the following parameters, all of which are optional and default
 - **mitigations**: (Boolean) STIG Mitigations
 - **nessusPID**: (Boolean) Resolve Unquoted Strings in Path
 - **horizon**: (Boolean) STIG VMware Horizon
-- **sosoptional**: (Boolean) Optional STIG/Hardening items
 
 An example of how to run the script with all default parameters would be:
 
